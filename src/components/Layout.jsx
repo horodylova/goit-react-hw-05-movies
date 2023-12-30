@@ -21,7 +21,7 @@ export const Layout = ({ children }) => {
       </main>
 
       <footer>
-        <p>© 2023 My App</p>
+        <p>© My App</p>
       </footer>
     </div>
   );
