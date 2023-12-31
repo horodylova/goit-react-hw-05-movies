@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 export const FormSearch = ({ onSearch }) => {
   const [searchquery, setSearchquery] = useState('');
 
-   const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     onSearch(searchquery);
   };
@@ -38,5 +38,6 @@ export const FormSearch = ({ onSearch }) => {
     </form>
   );
 };
+
 
 

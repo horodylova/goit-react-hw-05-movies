@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { searchMovies } from './apiDetails';
 
-const MovieDetails = () => {
+const MoviesSearch = () => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
 
@@ -30,6 +30,6 @@ const MovieDetails = () => {
   );
 };
 
-export default MovieDetails;
+export default MoviesSearch;
 
 
