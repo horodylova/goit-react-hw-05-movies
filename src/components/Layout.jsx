@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormSearch } from './FormSearch/FormSearch';
+import { NavLink } from 'react-router-dom';
 
 export const Layout = ({ children }) => {
   return (
@@ -10,13 +10,20 @@ export const Layout = ({ children }) => {
 
       <nav>
         <ul>
-          <li>Home</li>
-          <li>Movies</li>
+          <li>
+            <NavLink to="/">
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/movies">
+              Movies
+            </NavLink>
+          </li>
         </ul>
       </nav>
 
       <main>
-        <FormSearch />
         {children}
       </main>
 
@@ -26,4 +33,4 @@ export const Layout = ({ children }) => {
     </div>
   );
 };
- 
+
