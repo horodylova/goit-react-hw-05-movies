@@ -1,12 +1,13 @@
 
 import React, { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Outlet } from 'react-router-dom';
 
 const Home = lazy(() => import('../pages/Homepage'));
 const MoviesPage = lazy(() => import('../pages/MoviesPage'));
+const { MovieDetailsPage } = lazy(() => import('../pages/MovieDetailsPage'));
 
-// const SearchPage = lazy(() => import('../pages/SearchPage'));
-// const MovieDetails = lazy(() => import('../components/MovieDetails'));
+
+
 // const NotFound = lazy(() => import('../components/NotFound'));
 
 const AppRoutes = () => {
@@ -15,10 +16,10 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movies" element={<MoviesPage />} />
-
-        {/* <Route path="/search" element={<SearchPage />} />
-        <Route path="/movie/:id" element={<MovieDetails />} />
-        <Route path="*" element={<NotFound />} /> */}
+        <Route path="/movies/:movieId/*" element={<MovieDetailsPage />}>
+          <Route index element={<Outlet />} />
+        </Route>
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </Suspense>
   );
