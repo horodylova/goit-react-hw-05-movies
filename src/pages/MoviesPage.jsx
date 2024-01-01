@@ -13,7 +13,7 @@ const MoviesPage = () => {
       setSearchResults(response.results || []);
       console.log(response);
     } catch (error) {
-      console.error('Error searching movies:', error);
+      console.error( error);
     }
   };
 

@@ -12,7 +12,7 @@ const HomePage = () => {
         const response = await getTrendingMovies();
         setTrendingMovies(response.results);
       } catch (error) {
-        console.error('Error fetching trending movies:', error);
+        console.error( error);
       }
     };
 

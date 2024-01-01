@@ -1,11 +1,16 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMovieDetails } from '../api/apiOneMovie';
+import { getMovieDetails, getMovieCredits, getMovieReviews } from '../api/apiOneMovie';
 import { Link } from 'react-router-dom';
+import { Cast } from '../components/Cast/Cast';
+import { Reviews } from 'components/Reviews/Reviews';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
+  const [cast, setCast] = useState(null);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -19,6 +24,24 @@ const MovieDetailsPage = () => {
 
     fetchMovieDetails();
   }, [movieId]);
+
+  const fetchCast = async () => {
+    try {
+      const credits = await getMovieCredits(movieId);
+      setCast(credits.cast);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchReviews = async () => {
+    try {
+      const movieReviews = await getMovieReviews(movieId);
+      setReviews(movieReviews.reviews);
+    } catch (error) {
+      console.error( error);
+    }
+  };
 
   if (!movieDetails) {
     return <div>Loading...</div>;
@@ -42,13 +65,17 @@ const MovieDetailsPage = () => {
       <nav>
         <ul>
           <li>
-            <Link to="cast">Cast</Link>
+            <Link to={`cast`} onClick={fetchCast}>
+              Cast
+            </Link>
           </li>
           <li>
-            <Link to="reviews">Reviews</Link>
+            <Link to={`reviews`} onClick={fetchReviews}>Reviews</Link>
           </li>
         </ul>
       </nav>
+      {cast && <Cast cast={cast} />}
+      {reviews && <Reviews reviews={reviews}/>}
     </div>
   );
 };

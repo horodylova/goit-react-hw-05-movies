@@ -15,7 +15,7 @@ const MovieDetails = () => {
         const details = await getMovieDetails(movieId);
         setMovieDetails(details);
       } catch (error) {
-        console.error('Error fetching movie details:', error);
+        console.error( error);
       }
     };
 
