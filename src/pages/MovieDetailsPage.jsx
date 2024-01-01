@@ -37,7 +37,7 @@ const MovieDetailsPage = () => {
   const fetchReviews = async () => {
     try {
       const movieReviews = await getMovieReviews(movieId);
-      setReviews(movieReviews.reviews);
+      setReviews(movieReviews.results);
     } catch (error) {
       console.error( error);
     }
@@ -75,8 +75,8 @@ const MovieDetailsPage = () => {
         </ul>
       </nav>
       {cast && <Cast cast={cast} />}
-      {reviews && <Reviews reviews={reviews}/>}
-    </div>
+      {reviews && <Reviews fetchReviews={fetchReviews} reviews={reviews} />}   
+       </div>
   );
 };
 
