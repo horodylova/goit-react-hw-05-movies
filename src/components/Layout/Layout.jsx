@@ -32,7 +32,7 @@ export const Layout = ({ children }) => {
         </ul>
       </nav>
 
-      {location.state && location.state.from && <BackButton />}
+      {location.state?.from && <BackButton />}
 
       <main className={styles.appMain}>{children}</main>
 
