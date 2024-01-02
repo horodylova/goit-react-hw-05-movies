@@ -1,0 +1,115 @@
+/* HomePage */
+
+.home-container {
+    padding: 20px;
+  }
+  
+  .movie-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .movie-item {
+    margin-bottom: 10px;
+  }
+  
+  .movie-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  
+  .movie-link:hover {
+    text-decoration: underline;
+  }
+
+  /* MoviesPage */
+
+.movies-container {
+    padding: 20px;
+  }
+  
+  .search-results {
+    margin-top: 20px;
+  }
+  
+  .movie-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .movie-item {
+    margin-bottom: 10px;
+  }
+  
+  .movie-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  
+  .movie-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* MovieDetailsPage*/
+
+.movie-details-container {
+    padding: 20px;
+  }
+  
+  .movie-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .movie-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  .movie-info {
+    margin-bottom: 20px;
+  }
+  
+  .movie-genres {
+    font-weight: bold;
+  }
+  
+  .movie-overview {
+    margin-bottom: 20px;
+  }
+  
+  .movie-nav {
+    margin-bottom: 20px;
+  }
+  
+  .movie-nav-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .movie-nav-item {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .movie-nav-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .movie-nav-link:hover {
+    text-decoration: underline;
+  }
+  
+  .movie-cast-reviews {
+    margin-top: 20px;
+  }
+  

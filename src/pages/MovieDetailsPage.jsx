@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import { Cast } from '../components/Cast/Cast';
 import { Reviews } from 'components/Reviews/Reviews';
 
+import styles from './PageStyles.module.css';
+
+
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
@@ -50,34 +53,40 @@ const MovieDetailsPage = () => {
   const { title, backdrop_path, genres, overview, release_date, vote_average } =
     movieDetails;
 
-  return (
-    <div>
-      <h2>{title}</h2>
-      <img
-        src={`https://image.tmdb.org/t/p/w500${backdrop_path}`}
-        alt={`${title} backdrop`}
-        style={{ width: '100%', maxHeight: '400px', objectFit: 'cover' }}
-      />
-      <p>Genres: {genres.map(genre => genre.name).join(', ')}</p>
-      <p>Overview: {overview}</p>
-      <p>Release Date: {release_date}</p>
-      <p>Vote Average: {vote_average}</p>
-      <nav>
-        <ul>
-          <li>
-            <Link to={`cast`} onClick={fetchCast}>
-              Cast
-            </Link>
-          </li>
-          <li>
-            <Link to={`reviews`} onClick={fetchReviews}>Reviews</Link>
-          </li>
-        </ul>
-      </nav>
-      {cast && <Cast cast={cast} />}
-      {reviews && <Reviews fetchReviews={fetchReviews} reviews={reviews} />}   
-       </div>
-  );
+    return (
+      <div className={styles['movie-details-container']}>
+        <h2 className={styles['movie-title']}>{title}</h2>
+        <img
+          src={`https://image.tmdb.org/t/p/w500${backdrop_path}`}
+          alt={`${title} backdrop`}
+          className={styles['movie-image']}
+        />
+        <div className={styles['movie-info']}>
+          <p className={styles['movie-genres']}>Genres: {genres.map(genre => genre.name).join(', ')}</p>
+          <p className={styles['movie-overview']}>Overview: {overview}</p>
+          <p>Release Date: {release_date}</p>
+          <p>Vote Average: {vote_average}</p>
+        </div>
+        <nav className={styles['movie-nav']}>
+          <ul className={styles['movie-nav-list']}>
+            <li className={styles['movie-nav-item']}>
+              <Link to={`cast`} className={styles['movie-nav-link']} onClick={fetchCast}>
+                Cast
+              </Link>
+            </li>
+            <li className={styles['movie-nav-item']}>
+              <Link to={`reviews`} className={styles['movie-nav-link']} onClick={fetchReviews}>
+                Reviews
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        <div className={styles['movie-cast-reviews']}>
+          {cast && <Cast cast={cast} />}
+          {reviews && <Reviews fetchReviews={fetchReviews} reviews={reviews} />}
+        </div>
+      </div>
+    );
 };
 
 export default MovieDetailsPage;

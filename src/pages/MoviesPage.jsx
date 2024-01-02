@@ -4,6 +4,9 @@ import { searchMovies } from '..//api/apiDetails';
 
 import { Link } from 'react-router-dom';
 
+import styles from './PageStyles.module.css';
+
+
 const MoviesPage = () => {
   const [searchResults, setSearchResults] = useState([]);
 
@@ -13,34 +16,31 @@ const MoviesPage = () => {
       setSearchResults(response.results || []);
       console.log(response);
     } catch (error) {
-      console.error( error);
+      console.error(error);
     }
   };
 
   return (
-    <div>
+    <div className={styles['movies-container']}>
       <h2>Search Movies</h2>
       <FormSearch onSearch={handleSearch} />
+
       {searchResults.length > 0 && (
-        <div>
+        <div className={styles['search-results']}>
           <h3>Search Results</h3>
-          <ul>
+          <ul className={styles['movie-list']}>
             {searchResults.map((movie) => (
-              <li key={movie.id}>
-                <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+              <li key={movie.id} className={styles['movie-item']}>
+                <Link to={`/movies/${movie.id}`} className={styles['movie-link']}>
+                  {movie.title}
+                </Link>
               </li>
             ))}
           </ul>
         </div>
       )}
-      {searchResults.length === 0 && (
-        <div>
-          <h3>No results found</h3>
-        </div>
-      )}
     </div>
   );
-      }
-  
-export default MoviesPage;
+};
 
+export default MoviesPage;

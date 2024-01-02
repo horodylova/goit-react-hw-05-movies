@@ -1,0 +1,22 @@
+.reviews-container {
+    padding: 20px;
+  }
+  
+  .review-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .review-item {
+    margin-bottom: 20px;
+  }
+  
+  .review-author {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .review-content {
+    margin: 0;
+  }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './FormSearch.module.css';
 
 export const FormSearch = ({ onSearch }) => {
   const [searchquery, setSearchquery] = useState('');
@@ -16,28 +17,18 @@ export const FormSearch = ({ onSearch }) => {
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        className="search-input"
+        className={styles['search-input']}
         placeholder="Search by name"
-        style={{ padding: '8px', width: '200px', marginRight: '8px' }}
         value={searchquery}
         onChange={handleChange}
       />
-      <button
-        type="submit"
-        className="search-button"
-        style={{
-          padding: '8px 16px',
-          backgroundColor: '#007bff',
-          color: '#fff',
-          border: 'none',
-          cursor: 'pointer',
-        }}
-      >
+      <button type="submit" className={styles['search-button']}>
         Search
       </button>
     </form>
   );
 };
+
 
 
 
