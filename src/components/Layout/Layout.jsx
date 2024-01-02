@@ -1,13 +1,10 @@
 
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-
-import { BackButton } from '../BackButton/BackButton';
+import { NavLink } from 'react-router-dom';
 
 import styles from './Layout.module.css'; 
 
 export const Layout = ({ children }) => {
-  const location = useLocation();
 
   return (
     <div className={styles['app-container']}> 
@@ -16,7 +13,6 @@ export const Layout = ({ children }) => {
           Film Seeker
         </h1>
       </header>
-      {location.state?.from && <BackButton />}
 
       <nav className={styles['app-nav']}>
         <ul>
@@ -32,8 +28,6 @@ export const Layout = ({ children }) => {
           </li>
         </ul>
       </nav>
-
-   
 
       <main className={styles['app-main']}>{children}</main>
 
