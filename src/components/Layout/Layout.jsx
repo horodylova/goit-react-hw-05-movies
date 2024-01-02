@@ -10,33 +10,34 @@ export const Layout = ({ children }) => {
   const location = useLocation();
 
   return (
-    <div className={styles.appContainer}>
-      <header className={styles.appHeader}>
+    <div className={styles['app-container']}> 
+      <header className={styles['app-header']}>
         <h1>
-          <NavLink to="/">Film Seeker</NavLink>
+          Film Seeker
         </h1>
       </header>
+      {location.state?.from && <BackButton />}
 
-      <nav className={styles.appNav}>
+      <nav className={styles['app-nav']}>
         <ul>
           <li>
-            <NavLink to="/" className={styles.navLink}>
+            <NavLink to="/" className={styles['nav-link']}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/movies" className={styles.navLink}>
+            <NavLink to="/movies" className={styles['nav-link']}>
               Movies
             </NavLink>
           </li>
         </ul>
       </nav>
 
-      {location.state?.from && <BackButton />}
+   
 
-      <main className={styles.appMain}>{children}</main>
+      <main className={styles['app-main']}>{children}</main>
 
-      <footer className={styles.appFooter}>
+      <footer className={styles['app-footer']}>
         <p>© My App</p>
       </footer>
     </div>
