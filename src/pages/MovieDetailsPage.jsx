@@ -16,6 +16,7 @@ const MovieDetailsPage = () => {
   const [reviews, setReviews] = useState([]);
   const navigate = useNavigate(); 
   const location = useLocation();
+  
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -49,9 +50,14 @@ const MovieDetailsPage = () => {
   };
 
   const handleBack = () => {
-    navigate(location.state?.from || '/movies'); 
+      if (location.state?.from === '/search') {
+        navigate('/search', { state: { searchResults: location.state.searchResults } });
+      } else {
+        navigate(-1);
+      }
+      console.log(location.state);
+    };
     
-  }
 
   if (!movieDetails) {
     return <div>Loading...</div>;
