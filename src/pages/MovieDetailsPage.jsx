@@ -16,6 +16,7 @@ const MovieDetailsPage = () => {
   const [reviews, setReviews] = useState([]);
   const navigate = useNavigate(); 
   const location = useLocation();
+  const [activeTab, setActiveTab] = useState('cast');
   
 
   useEffect(() => {
@@ -57,6 +58,10 @@ const MovieDetailsPage = () => {
       }
       console.log(location.state);
     };
+
+    const handleTabChange = (tab) => {
+      setActiveTab(tab);
+    };
     
 
   if (!movieDetails) {
@@ -86,20 +91,23 @@ const MovieDetailsPage = () => {
             <button onClick={handleBack} className={styles['back-button']}>Go Back</button>
           </li>
             <li className={styles['movie-nav-item']}>
-              <Link to={`cast`} className={styles['movie-nav-link']} onClick={fetchCast}>
-                Cast
-              </Link>
-            </li>
+            <Link to={`cast`} className={`${styles['movie-nav-link']} ${activeTab === 'cast' && styles['active-tab']}`} onClick={() => {
+          fetchCast();
+          handleTabChange('cast');
+          }}>Cast</Link>
+
+           </li>
             <li className={styles['movie-nav-item']}>
-              <Link to={`reviews`} className={styles['movie-nav-link']} onClick={fetchReviews}>
+              <Link to={`reviews`} className={`${styles['movie-nav-link']} ${activeTab === 'reviews' && styles['active-tab']}`} onClick={()=>{fetchReviews(); handleTabChange('reviews')}}>
                 Reviews
               </Link>
+    
             </li>
           </ul>
         </nav>
         <div className={styles['movie-cast-reviews']}>
-          {cast && <Cast cast={cast} />}
-          {reviews && <Reviews fetchReviews={fetchReviews} reviews={reviews} />}
+        {activeTab === 'cast' && cast && <Cast cast={cast} />}
+        {activeTab === 'reviews' && reviews && <Reviews fetchReviews={fetchReviews} reviews={reviews} />}
         </div>
       </div>
     );
