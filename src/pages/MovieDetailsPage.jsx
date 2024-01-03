@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { useParams,  useNavigate } from 'react-router-dom';
+import { useParams,  useNavigate, useLocation } from 'react-router-dom';
 import { getMovieDetails, getMovieCredits, getMovieReviews } from '../api/apiOneMovie';
 import { Link } from 'react-router-dom';
 import { Cast } from '../components/Cast/Cast';
@@ -15,6 +15,7 @@ const MovieDetailsPage = () => {
   const [cast, setCast] = useState(null);
   const [reviews, setReviews] = useState([]);
   const navigate = useNavigate(); 
+  const location = useLocation();
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -47,6 +48,11 @@ const MovieDetailsPage = () => {
     }
   };
 
+  const handleBack = () => {
+    navigate(location.state?.from || '/movies'); 
+    
+  }
+
   if (!movieDetails) {
     return <div>Loading...</div>;
   }
@@ -71,7 +77,7 @@ const MovieDetailsPage = () => {
         <nav className={styles['movie-nav']}>
           <ul className={styles['movie-nav-list']}>
           <li>
-            <button onClick={() => navigate(-1)} className={styles['back-button']}>Go Back</button>
+            <button onClick={handleBack} className={styles['back-button']}>Go Back</button>
           </li>
             <li className={styles['movie-nav-item']}>
               <Link to={`cast`} className={styles['movie-nav-link']} onClick={fetchCast}>
