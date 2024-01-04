@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useSearchParams } from 'react';
 import { FormSearch } from '../components/FormSearch/FormSearch';
 import { MovieList } from '../components/MoviesList/MoviesList';
 
@@ -6,9 +6,11 @@ import { searchMovies } from '..//api/apiDetails';
 
 import styles from './PageStyles.module.css';
 
-
 const MoviesPage = () => {
   const [searchResults, setSearchResults] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const query = searchParams.get('query') || '';
 
   const handleSearch = async (query) => {
     try {
@@ -20,6 +22,10 @@ const MoviesPage = () => {
     }
   };
 
+  useEffect(() => {
+    setSearchParams('query', query);
+  }, [query, setSearchParams]);
+
   return (
     <div className={styles['movies-container']}>
       <h2>Search Movies</h2>
@@ -28,7 +34,7 @@ const MoviesPage = () => {
       {searchResults.length > 0 && (
         <div className={styles['search-results']}>
           <h3>Search Results</h3>
-          <MovieList  trendingMovies={searchResults}  />
+          <MovieList trendingMovies={searchResults} />
         </div>
       )}
     </div>
