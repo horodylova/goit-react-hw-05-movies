@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import styles from './FormSearch.module.css';
 
 export const FormSearch = ({ onSearch }) => {
   const [searchquery, setSearchquery] = useState('');
+  const [setSearchParams] = useSearchParams();
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,6 +15,7 @@ export const FormSearch = ({ onSearch }) => {
 
   const handleChange = (e) => {
     setSearchquery(e.target.value);
+    setSearchParams({searchquery}).toString()  
   };
 
   return (
@@ -29,6 +33,7 @@ export const FormSearch = ({ onSearch }) => {
     </form>
   );
 };
+
 
 
 

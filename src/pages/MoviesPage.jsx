@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useSearchParams } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { FormSearch } from '../components/FormSearch/FormSearch';
 import { MovieList } from '../components/MoviesList/MoviesList';
 
@@ -17,6 +18,7 @@ const MoviesPage = () => {
       const response = await searchMovies(query);
       setSearchResults(response.results || []);
       console.log(response);
+    
     } catch (error) {
       console.error(error);
     }
