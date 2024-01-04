@@ -64,8 +64,8 @@ const MovieDetailsPage = () => {
     movieDetails;
 
   return (
-    <div className={styles['movie-details-container']} to={backLink}>
-      <Link className={styles['back-button']}>
+    <div className={styles['movie-details-container']}>
+      <Link className={styles['back-button']} to={backLink}>
               Go Back </Link>
       <h2 className={styles['movie-title']}>{title}</h2>
       <img
