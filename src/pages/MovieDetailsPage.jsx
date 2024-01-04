@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import {
   getMovieDetails,
   getMovieCredits,
@@ -16,9 +16,10 @@ const MovieDetailsPage = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const [cast, setCast] = useState(null);
   const [reviews, setReviews] = useState([]);
-  const navigate = useNavigate();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('cast');
+
+  const backLink = location.state?.from ?? '/';
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -51,17 +52,6 @@ const MovieDetailsPage = () => {
     }
   };
 
-  const handleBack = () => {
-    if (location.state?.from === '/search') {
-      navigate('/search', {
-        state: { searchResults: location.state.searchResults },
-      });
-    } else {
-      navigate(-1);
-    }
-    console.log(location.state);
-  };
-
   const handleTabChange = tab => {
     setActiveTab(tab);
   };
@@ -74,7 +64,9 @@ const MovieDetailsPage = () => {
     movieDetails;
 
   return (
-    <div className={styles['movie-details-container']}>
+    <div className={styles['movie-details-container']} to={backLink}>
+      <Link className={styles['back-button']}>
+              Go Back </Link>
       <h2 className={styles['movie-title']}>{title}</h2>
       <img
         src={`https://image.tmdb.org/t/p/w500${backdrop_path}`}
@@ -91,11 +83,6 @@ const MovieDetailsPage = () => {
       </div>
       <nav className={styles['movie-nav']}>
         <ul className={styles['movie-nav-list']}>
-          <li>
-            <button onClick={handleBack} className={styles['back-button']}>
-              Go Back
-            </button>
-          </li>
           <li className={styles['movie-nav-item']}>
             <Link
               to={`cast`}

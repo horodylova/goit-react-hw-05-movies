@@ -1,10 +1,8 @@
-import React, { useState, useLocation } from 'react';
+import React, { useState } from 'react';
 import styles from './FormSearch.module.css';
 
 export const FormSearch = ({ onSearch }) => {
   const [searchquery, setSearchquery] = useState('');
-
-  const location = useLocation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +23,7 @@ export const FormSearch = ({ onSearch }) => {
         value={searchquery}
         onChange={handleChange}
       />
-      <button type="submit" className={styles['search-button']} state={{ from: location }}>
+      <button type="submit" className={styles['search-button']}>
         Search
       </button>
     </form>
