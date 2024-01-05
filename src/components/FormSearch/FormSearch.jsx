@@ -15,7 +15,7 @@ export const FormSearch = ({ onSearch }) => {
 
   const handleChange = (e) => {
     setSearchquery(e.target.value);
-    setSearchParams({searchquery}).toString()  
+    setSearchParams({searchquery}).toString();  
   };
 
   return (

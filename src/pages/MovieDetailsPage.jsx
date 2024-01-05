@@ -8,6 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 import { Cast } from '../components/Cast/Cast';
 import { Reviews } from 'components/Reviews/Reviews';
+import Image from '../components/Image';
 
 import styles from './PageStyles.module.css';
 
@@ -66,12 +67,12 @@ const MovieDetailsPage = () => {
   return (
     <div className={styles['movie-details-container']}>
       <Link className={styles['back-button']} to={backLink}>
-              Go Back </Link>
+        Go Back{' '}
+      </Link>
       <h2 className={styles['movie-title']}>{title}</h2>
-      <img
+      <Image
         src={`https://image.tmdb.org/t/p/w500${backdrop_path}`}
-        alt={`${title} backdrop`}
-        className={styles['movie-image']}
+        alt={title}
       />
       <div className={styles['movie-info']}>
         <p className={styles['movie-genres']}>
