@@ -9,29 +9,30 @@ import styles from './PageStyles.module.css';
 
 const MoviesPage = () => {
   const [searchResults, setSearchResults] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
-  const query = searchParams.get('query') || '';
+  const query = searchParams.get('searchquery');
 
-  const handleSearch = async (query) => {
-    try {
-      const response = await searchMovies(query);
-      setSearchResults(response.results || []);
-      console.log(response);
-    
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+ 
   useEffect(() => {
-    setSearchParams('query', query);
-  }, [query, setSearchParams]);
+    if(!query) return;
+    const getMovies = async () => {
+      try {
+        const response = await searchMovies(query);
+        setSearchResults(response.results);
+        console.log(response);
+      
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  getMovies();
+  }, [query]);
 
   return (
     <div className={styles['movies-container']}>
       <h2>Search Movies</h2>
-      <FormSearch onSearch={handleSearch} />
+      <FormSearch/>
 
       {searchResults.length > 0 && (
         <div className={styles['search-results']}>
