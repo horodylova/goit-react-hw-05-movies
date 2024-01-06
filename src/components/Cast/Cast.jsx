@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from '../Image';
 import styles from './Cast.module.css';
 
 export const Cast = ({ cast }) => {
@@ -8,8 +9,8 @@ export const Cast = ({ cast }) => {
       <ul className={styles['cast-list']}>
         {cast.map(actor => (
           <li key={actor.id} className={styles['cast-item']}>
-            <img
-              src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+            <Image
+              src={null}
               alt={`${actor.name} profile`}
               className={styles['cast-image']}
             />
@@ -20,8 +21,3 @@ export const Cast = ({ cast }) => {
     </div>
   );
 };
-
-
- 
-
-

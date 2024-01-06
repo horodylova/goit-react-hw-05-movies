@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-export const MovieList = ({ trendingMovies }) => {
+export const MovieList = ({ trendingMovies, searchQuery }) => {
     
     const location = useLocation();
 
@@ -9,7 +9,8 @@ export const MovieList = ({ trendingMovies }) => {
     <ul>
       {trendingMovies.map((movie) => (
         <li key={movie.id}>
-          <Link to={`/movies/${movie.id}`} state={{from:location}}>
+          <Link to={`/movies/${movie.id}`} state={{from:location, searchQuery }}>
+
             {movie.title}
           </Link>
         </li>

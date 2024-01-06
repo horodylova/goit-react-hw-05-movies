@@ -8,7 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 import { Cast } from '../components/Cast/Cast';
 import { Reviews } from 'components/Reviews/Reviews';
-import Image from '../components/Image';
+import { Image } from '../components/Image';
 
 import styles from './PageStyles.module.css';
 
@@ -61,7 +61,7 @@ const MovieDetailsPage = () => {
     return <div>Loading...</div>;
   }
 
-  const { title, backdrop_path, genres, overview, release_date, vote_average } =
+  const { title, genres, overview, release_date, vote_average } =
     movieDetails;
 
   return (
@@ -71,7 +71,7 @@ const MovieDetailsPage = () => {
       </Link>
       <h2 className={styles['movie-title']}>{title}</h2>
       <Image
-        src={`https://image.tmdb.org/t/p/w500${backdrop_path}`}
+         src={null}
         alt={title}
       />
       <div className={styles['movie-info']}>

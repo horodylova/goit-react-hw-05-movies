@@ -4,14 +4,11 @@ import styles from './FormSearch.module.css';
 
 export const FormSearch = ({ onSearch }) => {
   const [searchquery, setSearchquery] = useState('');
-  const [ , setSearchParams] = useSearchParams();
-
+  const [, setSearchParams] = useSearchParams();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSearchParams({searchquery});  
-
-    
+    setSearchParams({ searchquery: searchquery });
   };
 
   const handleChange = (e) => {
@@ -33,8 +30,6 @@ export const FormSearch = ({ onSearch }) => {
     </form>
   );
 };
-
-
 
 
 
