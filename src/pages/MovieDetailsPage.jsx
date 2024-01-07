@@ -12,7 +12,7 @@ import { Image } from '../components/Image';
 
 import styles from './PageStyles.module.css';
 
-const MovieDetailsPage = () => {
+const MovieDetailsPage = ({ setSearchQuery }) => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const [cast, setCast] = useState(null);
@@ -20,7 +20,9 @@ const MovieDetailsPage = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('cast');
 
-  const backLink = location.state?.from ?? '/';
+  const backLink = location?.state?.from ?? '/'; 
+
+  const searchQuery = location?.state?.searchQuery;
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -34,6 +36,12 @@ const MovieDetailsPage = () => {
 
     fetchMovieDetails();
   }, [movieId]);
+
+  useEffect(() => {
+    if (searchQuery) {
+      setSearchQuery(searchQuery); 
+    }
+  }, [searchQuery, setSearchQuery])
 
   const fetchCast = async () => {
     try {
