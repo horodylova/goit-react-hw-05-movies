@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import {
   getMovieDetails,
   getMovieCredits,
@@ -7,7 +7,7 @@ import {
 } from '../api/apiOneMovie';
 import { Link } from 'react-router-dom';
 import { Cast } from '../components/Cast/Cast';
-import { Reviews } from '../components/Reviews/Reviews';
+import { Reviews } from 'components/Reviews/Reviews';
 import { Image } from '../components/Image';
 
 import styles from './PageStyles.module.css';
@@ -19,9 +19,9 @@ const MovieDetailsPage = ({ setSearchQuery }) => {
   const [reviews, setReviews] = useState([]);
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('cast');
-  const navigate = useNavigate();
 
-  const backLink = location?.state?.from ?? '/';
+  const backLink = location?.state?.from?.pathname ?? '/';
+  
   const searchQuery = location?.state?.searchQuery;
 
   useEffect(() => {
@@ -39,53 +39,38 @@ const MovieDetailsPage = ({ setSearchQuery }) => {
 
   useEffect(() => {
     if (searchQuery) {
-      setSearchQuery(searchQuery);
+      setSearchQuery(searchQuery); 
     }
-  }, [searchQuery, setSearchQuery]);
+  }, [searchQuery, setSearchQuery])
 
-  const fetchCast = () => {
-    getMovieCredits(movieId)
-      .then(credits => {
-        setCast(credits.cast);
-      })
-      .catch(error => console.log(error))
-      .finally(() => {
-        handleTabChange();
-      });
+  const fetchCast = async () => {
+    try {
+      const credits = await getMovieCredits(movieId);
+      setCast(credits.cast);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const fetchReviews = () => {
-    getMovieReviews(movieId)
-      .then(movieReviews => {
-        setReviews(movieReviews.results);
-      })
-      .catch(error => console.log(error))
-      .finally(() => {
-        handleTabChange();
-      });
+  const fetchReviews = async () => {
+    try {
+      const movieReviews = await getMovieReviews(movieId);
+      setReviews(movieReviews.results);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleTabChange = (tab) => {
+  const handleTabChange = tab => {
     setActiveTab(tab);
-
-    const state = { ...location.state };
-
-    if (cast) {
-      state.cast = cast;
-    }
-
-    if (reviews) {
-      state.reviews = reviews;
-    }
-
-    navigate(location.pathname, { state });
   };
 
   if (!movieDetails) {
     return <div>Loading...</div>;
   }
 
-  const { title, genres, overview, release_date, vote_average } = movieDetails;
+  const { title, genres, overview, release_date, vote_average, backdrop_path } =
+    movieDetails;
 
   return (
     <div className={styles['movie-details-container']}>
@@ -93,8 +78,10 @@ const MovieDetailsPage = ({ setSearchQuery }) => {
         Go Back{' '}
       </Link>
       <h2 className={styles['movie-title']}>{title}</h2>
-      <Image alt={title} />
-
+      <Image
+         src={`https://image.tmdb.org/t/p/w500${backdrop_path}`}
+        alt={title}
+      />
       <div className={styles['movie-info']}>
         <p className={styles['movie-genres']}>
           Genres: {genres.map(genre => genre.name).join(', ')}
@@ -146,3 +133,12 @@ const MovieDetailsPage = ({ setSearchQuery }) => {
 };
 
 export default MovieDetailsPage;
+
+
+
+
+
+
+
+
+
