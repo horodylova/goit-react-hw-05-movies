@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import { useMoviesContext } from '../components/MoviesContext';
 import { FormSearch } from '../components/FormSearch/FormSearch';
 import { MovieList } from '../components/MoviesList/MoviesList';
@@ -8,11 +8,16 @@ import styles from './PageStyles.module.css';
 
 const MoviesPage = () => {
   const [searchResults, setSearchResults] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { searchResults: savedResults, setResults } = useMoviesContext();
+  const [searchParams, ] = useSearchParams();
+  const { setResults } = useMoviesContext();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const query = searchParams.get('searchquery');
+
+  useEffect(() => {
+    location.state = { from: location.pathname };
+  }, [location]);
 
   useEffect(() => {
     if (!query) return;
@@ -53,10 +58,9 @@ const MoviesPage = () => {
         </div>
       )}
 
-      {savedResults.length > 0 && (
-        <div className={styles['search-results']}>
-          <h3>Saved Results</h3>
-          <MovieList trendingMovies={savedResults} />
+      {location.state?.from && (
+        <div className={styles['back-button-container']}>
+          <button className={styles['back-button']} onClick={() => navigate(location.state.from)}>Go Back</button>
         </div>
       )}
     </div>
@@ -64,3 +68,4 @@ const MoviesPage = () => {
 };
 
 export default MoviesPage;
+

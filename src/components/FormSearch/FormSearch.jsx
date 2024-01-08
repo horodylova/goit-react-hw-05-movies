@@ -8,7 +8,8 @@ export const FormSearch = ({ onSearch }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSearchParams({ searchquery: searchquery });
+    setSearchParams({ query: searchquery }); 
+    onSearch(searchquery);  
   };
 
   const handleChange = (e) => {
@@ -30,6 +31,3 @@ export const FormSearch = ({ onSearch }) => {
     </form>
   );
 };
-
-
-

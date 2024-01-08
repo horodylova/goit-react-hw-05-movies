@@ -20,8 +20,9 @@ const MovieDetailsPage = ({ setSearchQuery }) => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('cast');
 
-  const backLink = location?.state?.from?.pathname ?? '/';
-  
+  // const backLink = location.state?.from ?? '/';
+  const [previousPath, ] = useState(location.state?.from ?? '/');
+
   const searchQuery = location?.state?.searchQuery;
 
   useEffect(() => {
@@ -72,16 +73,17 @@ const MovieDetailsPage = ({ setSearchQuery }) => {
   const { title, genres, overview, release_date, vote_average, backdrop_path } =
     movieDetails;
 
+  const imageSrc = backdrop_path
+    ? `https://image.tmdb.org/t/p/w500${backdrop_path}`
+    : 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
+
   return (
     <div className={styles['movie-details-container']}>
-      <Link className={styles['back-button']} to={backLink}>
+      <Link className={styles['back-button']} to={previousPath} >
         Go Back{' '}
       </Link>
       <h2 className={styles['movie-title']}>{title}</h2>
-      <Image
-         src={`https://image.tmdb.org/t/p/w500${backdrop_path}`}
-        alt={title}
-      />
+      <Image src={imageSrc} alt={title} />
       <div className={styles['movie-info']}>
         <p className={styles['movie-genres']}>
           Genres: {genres.map(genre => genre.name).join(', ')}
@@ -94,7 +96,7 @@ const MovieDetailsPage = ({ setSearchQuery }) => {
         <ul className={styles['movie-nav-list']}>
           <li className={styles['movie-nav-item']}>
             <Link
-              to={`cast`}
+              // to={`cast`}
               className={`${styles['movie-nav-link']} ${
                 activeTab === 'cast' && styles['active-tab']
               }`}
@@ -108,7 +110,7 @@ const MovieDetailsPage = ({ setSearchQuery }) => {
           </li>
           <li className={styles['movie-nav-item']}>
             <Link
-              to={`reviews`}
+              // to={`reviews`}
               className={`${styles['movie-nav-link']} ${
                 activeTab === 'reviews' && styles['active-tab']
               }`}
@@ -133,6 +135,7 @@ const MovieDetailsPage = ({ setSearchQuery }) => {
 };
 
 export default MovieDetailsPage;
+
 
 
 

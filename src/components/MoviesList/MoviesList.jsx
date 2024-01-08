@@ -9,7 +9,10 @@ export const MovieList = ({ trendingMovies, searchQuery, searchResults }) => {
       {trendingMovies.map(movie => (
         <li key={movie.id}>
           <Link
-            to={`/movies/${movie.id}`}
+             to={{
+              pathname: `/movies/${movie.id}`,
+              search: `?searchQuery=${searchQuery}`,
+            }}
             state={{
               from: location,
               searchResults: searchResults || [],
