@@ -10,7 +10,7 @@ export const Cast = ({ cast }) => {
         {cast.map(actor => (
           <li key={actor.id} className={styles['cast-item']}>
             <Image
-              src={null}
+             
               alt={`${actor.name} profile`}
               className={styles['cast-image']}
             />

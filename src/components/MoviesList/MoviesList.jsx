@@ -12,8 +12,8 @@ export const MovieList = ({ trendingMovies, searchQuery, searchResults }) => {
             to={`/movies/${movie.id}`}
             state={{
               from: location,
-              searchResults,
-              searchQuery }}>
+              searchResults: searchResults || [],
+              searchQuery: searchQuery || ''}}>
             {movie.title}
           </Link>
         </li>
